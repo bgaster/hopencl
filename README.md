@@ -16,3 +16,7 @@ Optional Requisties
 -------------------
 
 OpenCL interoperability with OpenCL requires the Haskell library 
+
+
+Authors
+-------
