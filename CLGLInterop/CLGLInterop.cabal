@@ -1,0 +1,11 @@
+name: CLGLInterop
+version: 0.0
+license: AllRightsReserved
+build-type: Simple
+cabal-version: >= 1.2
+
+library
+  exposed-modules: Language.OpenCL.Host.GLInterop
+  build-depends: base < 5, HOpenCL, OpenGL, mtl
+  ghc-options: -threaded -O2
+

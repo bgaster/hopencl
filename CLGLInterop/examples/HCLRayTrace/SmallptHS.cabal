@@ -1,0 +1,13 @@
+name: SmallptHS
+version: 0.0
+license: AllRightsReserved
+build-type: Simple
+cabal-version: >= 1.2
+
+executable SmallptHS
+  main-is: Main.hs
+  build-depends: base < 5, HOpenCL, OpenGL, GLUT, CLGLInterop, random, time, mtl, array
+  ghc-options: -threaded -O2
+  build-tools: hsc2hs
+  other-modules: BaseTypes, Device, Render, Scene
+  include-dirs: .
