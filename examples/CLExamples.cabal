@@ -1,0 +1,30 @@
+name: CLExamples
+version: 0.0
+license: AllRightsReserved
+build-type: Simple
+cabal-version: >= 1.2
+
+executable Tutorial1a
+  main-is: Tutorial1a.hs
+  build-depends: base < 5, HOpenCL, mtl
+  ghc-options: -main-is Tutorial1a.main -threaded
+
+executable Tutorial1b
+  main-is: Tutorial1b.hs
+  build-depends: base < 5, HOpenCL, mtl, array
+  ghc-options: -main-is Tutorial1b.main -threaded
+
+executable PrefixSum
+  main-is: PrefixSum.hs
+  build-depends: base < 5, HOpenCL
+  ghc-options: -main-is PrefixSum.main -threaded
+
+executable PrefixSumA
+  main-is: PrefixSuma.hs
+  build-depends: base < 5, HOpenCL, mtl, stm
+  ghc-options: -main-is PrefixSumA.main -threaded
+
+executable cml
+  main-is: cml.hs
+  build-depends: base < 5, HOpenCL, mtl, cml
+  ghc-options: -main-is CMLEx1.main -threaded

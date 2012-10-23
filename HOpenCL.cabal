@@ -1,0 +1,25 @@
+name: HOpenCL
+version: 0.0
+license: AllRightsReserved
+build-type: Simple
+cabal-version: >= 1.2
+
+library          
+  exposed-modules: Language.OpenCL.Host, 
+                   Language.OpenCL.Module,
+                   Language.OpenCL.Host.FFI, 
+                   Language.OpenCL.Host.Constants, 
+                   Language.OpenCL.Host.Core
+  build-depends: base < 5, mtl, array, parsec >= 3.1.0, syb, template-haskell
+  build-tools: hsc2hs
+  ghc-options: -threaded -O2
+
+  if os(windows)
+    extra-libraries: opencl
+    extra-lib-dirs: c:\Users\brg\tree\dist\windows\release\lib\x86
+    include-dirs: c:\Users\brg\tree\dist\windows\release\include
+
+  if os(darwin)
+    cpp-options: -DCALLCONV=ccall
+    cc-options: "-U__BLOCKS__"
+    Frameworks:  OpenCL
