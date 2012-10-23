@@ -40,6 +40,53 @@ OpenCL interoperability with OpenGL requires the Haskell library
 Additionally, the OpenCL interoperability with OpenGL examples require
 the Haskell package [GLUT](http://hackage.haskell.org/package/GLUT).
 
+Building 
+---------
+
+To build, try:
+
+cabal install
+
+in the root HOpenCL directory, which should track down any dependencies, configure, and build.  It
+should install into local directories (%APPDATA%\Roaming\cabal, on Windows) so you probably don't
+need to be admin.
+
+EXAMPLES
+
+The examples have been split into their own CABAL package.  To build them, try:
+
+cd examples
+cabal install
+
+This will install the examples into some local directory.. (%APPDATA%\Roaming\cabal\bin, on
+Windows).  If you'd prefer not to have two copies of the binaries running around, you could try:
+
+cd examples
+cabal configure
+cabal build
+
+The examples expect to find various _kernels.cl files in the current directory, so you probably to
+run them from the examples directory.
+
+License
+-------
+
+Copyright ©2012 Advanced Micro Devices, Inc. All rights reserved.
+
+*   Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met: 
+*   Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.  
+*   Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the
+    documentation and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+********************************************************************
+
+
 Authors
 -------
 
