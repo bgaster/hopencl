@@ -1,0 +1,2 @@
+extra-lib-dirs: "@opencl_path@\\lib\\x86"
+include-dirs: "@opencl_path@\\include"
