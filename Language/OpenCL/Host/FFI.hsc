@@ -7,7 +7,11 @@ import Foreign.C
 import Language.OpenCL.Host.Constants
 
 -- hsc2hs structure support:
-#include "CL/cl.h"
+#ifdef __APPLE__
+	#include <OpenCL/opencl.h>
+#else
+	#include "CL/cl.h"
+#endif
 #let alignment t = "%lu", (unsigned long)offsetof(struct {char x__; t (y__); }, y__)
 
 --
