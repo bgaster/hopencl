@@ -36,7 +36,7 @@ data Module = Mod { context_ ::  Context
                   , queue_ :: CommandQueue }
 
 newtype ModuleM t = ModuleM { runModuleM :: PoliteT (ReaderT Module IO) t } 
-    deriving (Functor, Monad, MonadIO, CatchIO, MonadReader Module)
+    deriving (Functor, Applicative, Monad, MonadIO, CatchIO, MonadReader Module)
 
 instance Lifespan Module
     where retain (Mod c ks q) = sequence_ [ retain c, retain ks, retain q ]

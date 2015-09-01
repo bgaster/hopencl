@@ -25,6 +25,8 @@ import Prelude hiding (catch)
 import Unsafe.Coerce
 import System.IO.Unsafe
 
+import Control.Applicative
+
 ----------------------------------------------------------------------------------------------------
 -- Lift IO exception into CL monads
 --
@@ -51,8 +53,8 @@ appendingLocation location comp = comp `catch` appender
 
 instance CatchIO IO
     where catch = Except.catch
-          block = Except.block
-          unblock = Except.unblock
+          block = Except.mask_
+          unblock = Except.mask_
 
 instance CatchIO m => CatchIO (ReaderT r m)
     where catch m catcher = ReaderT $ \ val ->
@@ -101,6 +103,10 @@ preservingPoliteness transformer (Polite f) = Polite (\events -> transformer (f 
 instance Functor m => Functor (PoliteT m)
     where fmap f (Polite c) = Polite (\events -> fmap f (c events))
 
+instance Applicative m => Applicative (PoliteT m)
+    where pure  a                   = Polite (\events -> pure a)
+          (Polite c) <*> (Polite b) = Polite (\events -> (c events) <*> (b events))
+
 instance MonadIO m => Monad (PoliteT m)
     where return x                = impolite (return x)
           Polite c >>= f   = Polite (\events -> c events >>= runPolite . f) 
@@ -131,7 +137,7 @@ instance (MonadIO m, MonadReader t m) => MonadReader t (PoliteT m)
 ----------------------------------------------------------------------------------------------------
 
 newtype ContextM t = ContextM { runContextM :: PoliteT (ReaderT Context IO) t }
-    deriving (Functor, Monad, MonadIO, CatchIO, MonadReader Context, MonadPolite)
+    deriving (Functor, Applicative, Monad, MonadIO, CatchIO, MonadReader Context, MonadPolite)
 
 class (Functor m, MonadIO m) => Contextual m 
     where contextual :: ContextM t -> m t
@@ -146,7 +152,7 @@ queryContext :: (Queryable Context q, Contextual m) => q a -> m a
 queryContext q = theContext >>= (? q)
 
 newtype QueueM t = QueueM { runQueueM :: PoliteT (ReaderT CommandQueue (ReaderT Context IO)) t }
-    deriving (Functor, Monad, MonadIO, CatchIO, MonadReader CommandQueue, MonadPolite)
+    deriving (Functor, Applicative, Monad, MonadIO, CatchIO, MonadReader CommandQueue, MonadPolite)
 
 class (Contextual m, MonadIO m) => Queued m 
     where queued :: QueueM t -> m t
