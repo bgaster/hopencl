@@ -23,8 +23,3 @@ executable PrefixSumA
   main-is: PrefixSuma.hs
   build-depends: base < 5, HOpenCL, mtl, stm
   ghc-options: -main-is PrefixSumA.main -threaded
-
-executable cml
-  main-is: cml.hs
-  build-depends: base < 5, HOpenCL, mtl, cml
-  ghc-options: -main-is CMLEx1.main -threaded
